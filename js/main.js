@@ -2,9 +2,11 @@ console.log("main");
 // ============================
 
 var box = Array.from(document.querySelectorAll(".box"));
-// ====================
 var play_Text = document.querySelector("#play_Text");
+// ====================
+var re_start_btn = document.querySelector("#re_start_btn");
 
+// var spaces = []
 var spaces = [null, null, null, null, null, null, null, null, null];
 var o_Text = "O";
 var x_Text = "X";
@@ -35,7 +37,6 @@ function draw_Bord() {
         box.addEventListener("click", box_clicked);
     });
 }
-draw_Bord();
 
 function box_clicked(e) {
     var id = e.target.id;
@@ -44,9 +45,9 @@ function box_clicked(e) {
         spaces[id] = current;
         e.target.innerText = current;
 
-        // ====================
         if (player_Has_Won()) {
             play_Text.innerText = `${current} = has win!`;
+            // ====================
             return;
         }
 
@@ -54,10 +55,9 @@ function box_clicked(e) {
     }
 }
 
-// ====================
 function player_Has_Won() {
+    //from top left, check across, down, and diagonal
     if (spaces[0] === current) {
-
         if (spaces[1] === current && spaces[2] === current) {
             console.log(`${current} wins up top`);
             return true;
@@ -72,23 +72,22 @@ function player_Has_Won() {
             console.log(`${current} wins on the left`);
             return true;
         }
-
     }
 
+    //from bottom check up and across
     if (spaces[8] === current) {
-
         if (spaces[2] === current && spaces[5] === current) {
             console.log(`${current} wins on the right`);
             return true;
         }
 
-        if (spaces[6] === current && spaces[7] === current) {
+        if (spaces[7] === current && spaces[6] === current) {
             console.log(`${current} wins on the bottom`);
             return true;
         }
-
     }
 
+    //from middle check middle vertical and middle horizontal
     if (spaces[4] === current) {
 
         if (spaces[1] === current && spaces[7] === current) {
@@ -100,7 +99,25 @@ function player_Has_Won() {
             console.log(`${current} wins on the middle`);
             return true;
         }
-
     }
-
 }
+
+// ====================
+re_start_btn.addEventListener("click", restart);
+
+function restart() {
+    spaces.forEach(function (space, index) {
+        spaces[index] = null;
+    });
+
+    box.forEach(function (box) {
+        box.innerText = "";
+    });
+
+    play_Text.innerText = `Let's play`;
+
+    current = o_Text;
+}
+
+
+draw_Bord();
