@@ -1,12 +1,7 @@
-console.log("main");
-// ============================
-
 var box = Array.from(document.querySelectorAll(".box"));
 var play_Text = document.querySelector("#play_Text");
-// ====================
 var re_start_btn = document.querySelector("#re_start_btn");
 
-// var spaces = []
 var spaces = [null, null, null, null, null, null, null, null, null];
 var o_Text = "O";
 var x_Text = "X";
@@ -102,7 +97,6 @@ function player_Has_Won() {
     }
 }
 
-// ====================
 re_start_btn.addEventListener("click", restart);
 
 function restart() {
